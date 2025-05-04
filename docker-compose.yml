@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  # RabbitMQ Service
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"     # AMQP port
+      - "15672:15672"   # Management UI
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
+  # API Service (optional)
+  api:
+    build:
+      context: .
+      dockerfile: AssesstmentMicroservices.API/Dockerfile
+    ports:
+      - "5000:80"
+    depends_on:
+      - rabbitmq
+    environment:
+      - RabbitMQ__HostName=rabbitmq
+
+volumes:
+  rabbitmq_data:
