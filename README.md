@@ -61,8 +61,10 @@ Try POST /api/order/publish with this sample payload:
 
 
 ## 🧪 Project Structure
+```
 src/
 ├── MyMicroservice.Api           → Entry point (.NET Web API)
 ├── MyMicroservice.Application   → Interfaces, DTOs, business logic
 ├── MyMicroservice.Infrastructure → RabbitMQ, persistence, logging
 └── MyMicroservice.Domain        → Core entities, events
+```
